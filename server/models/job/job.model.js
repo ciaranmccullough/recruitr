@@ -15,9 +15,9 @@ const JobSchema = new Schema({
   description: { type: String, required: true },
   job_type: { type: String, required: true },
   start_date: { type: Date, required: true },
-  // contract_length: { type: Number, required: true },
-  // contact_name: { type: String, required: true },
-  // ref: { type: String, required: true },
+  contract_length: { type: Number, required: true },
+  contact_name: { type: String, required: true },
+  ref: { type: String, required: true },
   // owner: { type: ObjectId, ref: 'Recruiter' },
 });
 

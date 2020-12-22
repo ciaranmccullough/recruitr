@@ -9,6 +9,7 @@ exports.getRecruiters = async function(req, res) {
   }
   await Recruiter.find(query).exec((err, recruiters) => {
     if (err) return errorHandler(res, err);
+    console.log('Getting data...');
     return res.status(200).json(recruiters);
   });
 };

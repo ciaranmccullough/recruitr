@@ -11,15 +11,16 @@ exports.getJobs = async function(req, res) {
     .populate('owner')
     .exec((err, jobs) => {
       if (err) return errorHandler(res, err);
+      console.log('Getting data...');
       return res.status(200).json(jobs);
     });
 };
 
 // Add a job
-exports.addJob = async function(req, res) {
+exports.addJob = function(req, res) {
   const jobData = req.body;
   console.log('jobData', jobData);
-  const job = await new Job(jobData);
+  const job = new Job(jobData);
   job.save((err, job) => {
     if (err) return errorHandler(res, err);
     else return res.status(201).json(job);
@@ -35,8 +36,8 @@ exports.updateJob = async function(req, res) {
 };
 
 // Delete a job
-exports.deleteJob = async function(req, res) {
-  await Job.deleteOne({ _id: req.params.id }, (err) => {
+exports.deleteJob = function(req, res) {
+  Job.deleteOne({ _id: req.params.id }, (err) => {
     if (err) return errorHandler(res, err);
     res.sendStatus(204);
   });

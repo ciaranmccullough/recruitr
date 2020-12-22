@@ -3,6 +3,7 @@ const path = require('path');
 const helmet = require('helmet');
 const compression = require('compression');
 const cors = require('cors');
+// const session = require('express-session');
 
 module.exports = function(app) {
   // In dev mode, react-server serves the files BUT in production we BUILD the react project and express serves it out of the build folder
@@ -21,4 +22,5 @@ module.exports = function(app) {
   app.use(helmet());
   // CORS to make our API public
   app.use(cors());
+  // Session to store session data on server
 };

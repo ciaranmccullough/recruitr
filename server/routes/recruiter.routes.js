@@ -6,6 +6,9 @@ const {
   updateRecruiter,
   deleteRecruiter,
 } = require('../controllers/recruiter.controller');
+// const redisCacheMiddleware = require('express-redis-cache-middleware');
+// const options = {};
+// const { cacheMiddleware } = redisCacheMiddleware(options);
 
 router
   .get('/', getRecruiters)
