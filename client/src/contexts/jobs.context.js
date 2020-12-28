@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const JobsContext = createContext({
   getJobs: () => [],
@@ -16,7 +16,6 @@ export const JobsProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
-  // const [search, setSearch] = useState("");
 
   const getJobs = async () => {
     // console.log('loading', loading);
@@ -27,7 +26,7 @@ export const JobsProvider = (props) => {
       setLoading(true);
     }
     try {
-      const response = await fetch('http://localhost:5000/api/v1/jobs');
+      const response = await fetch('/api/v1/jobs');
       if (response.status !== 200) {
         throw response;
       }
@@ -49,13 +48,12 @@ export const JobsProvider = (props) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(formData),
       });
-      // if (response.status !== 201) {
-      //   throw response;
-      // }
+      if (response.status !== 201) {
+        throw response;
+      }
       const savedJob = await response.json();
 
       console.log('got data', savedJob);
@@ -73,7 +71,6 @@ export const JobsProvider = (props) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(updates),
       });
@@ -92,11 +89,6 @@ export const JobsProvider = (props) => {
         ...updates, // order here is important for the override!!
       };
 
-      // this is a bit sketchy, but shouldn't go out of line
-      if (typeof newJob.owner === 'string') {
-        newJob.owner = fullOwner;
-      }
-
       console.log('here', newJob);
       // recreate the jobs array
       const updatedJobs = [
@@ -112,7 +104,6 @@ export const JobsProvider = (props) => {
   };
 
   const deleteJob = async (id) => {
-    let deletedJob = null;
     try {
       const response = await fetch(`/api/v1/jobs/${id}`, {
         method: 'DELETE',
@@ -126,7 +117,6 @@ export const JobsProvider = (props) => {
       }
       // Get index
       const index = jobs.findIndex((job) => job._id === id);
-      deletedJob = jobs[index];
       // recreate the jobs array without that job
       const updatedJobs = [...jobs.slice(0, index), ...jobs.slice(index + 1)];
       await setJobs(updatedJobs);

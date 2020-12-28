@@ -3,6 +3,7 @@ import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useLocation } from 'react-router-dom';
+import FloatingActionButton from '../fab/fab';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,7 @@ export default function PageFrame(props) {
             <Grid item xs={12}>
               {props.children}
             </Grid>
+            <FloatingActionButton />
           </Grid>
         </Container>
       </CSSTransition>

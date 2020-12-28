@@ -1,32 +1,30 @@
 import React from 'react';
+import './styles/App.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Contexts
-import { RecruitersProvider } from './contexts/recruiters.context';
 import { JobsProvider } from './contexts/jobs.context';
 import { MenuProvider } from './contexts/menu.context';
 
 // Pages
 import Home from './pages/home/home';
-import Recruiters from './pages/recruiters/recruiters';
+import About from './pages/about/about';
 import Jobs from './pages/jobs/jobs';
+import Contact from './pages/contact/contact';
 
 function App() {
   return (
-    <>
-      <RecruitersProvider>
-        <JobsProvider>
-          <MenuProvider>
-            <Router>
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/jobs' component={Jobs} />
-                <Route exact path='/recruiters' component={Recruiters} />
-              </Switch>
-            </Router>
-          </MenuProvider>
-        </JobsProvider>
-      </RecruitersProvider>
-    </>
+    <JobsProvider>
+      <MenuProvider>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/about' component={About} />
+            <Route exact path='/jobs' component={Jobs} />
+            <Route exact path='/contact' component={Contact} />
+          </Switch>
+        </Router>
+      </MenuProvider>
+    </JobsProvider>
   );
 }
 
